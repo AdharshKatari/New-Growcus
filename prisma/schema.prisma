@@ -244,3 +244,60 @@ model Notification {
   @@index([schoolId, recipientId])
   @@map("notifications")
 }
+
+enum RiskLevel {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum FlagStatus {
+  PENDING
+  ROUTED_TO_REVISION
+  OVERRIDE_BY_OWNER
+  SETTLED
+}
+
+enum AnomalyTrigger {
+  VELOCITY_GAP
+  HISTORICAL_DELAY_SPIKE
+  CONCESSION_MISMATCH
+  PAYMENT_VELOCITY_DROP
+}
+
+model MLCashflowPredictions {
+  id                    String                @id @default(uuid()) @db.Uuid
+  schoolId              String                @map("school_id") @db.Uuid
+  studentId             String                @map("student_id") @db.Uuid
+  familyGroupId         String                @map("family_group_id")
+  predictedPaymentDate  DateTime              @map("predicted_payment_date")
+  currentRiskScore      Float                 @map("current_risk_score")
+  riskTier              RiskLevel             @default(LOW) @map("risk_tier")
+  predictedVarianceDays Int                   @map("predicted_variance_days")
+  calculatedAt          DateTime              @default(now()) @map("calculated_at")
+  anomalies             CashflowAnomalyFlag[]
+
+  @@index([schoolId, riskTier])
+  @@index([familyGroupId])
+  @@map("ml_cashflow_predictions")
+}
+
+model CashflowAnomalyFlag {
+  id                       String                @id @default(uuid()) @db.Uuid
+  predictionId             String                @map("prediction_id") @db.Uuid
+  prediction               MLCashflowPredictions @relation(fields: [predictionId], references: [id], onDelete: Cascade)
+  triggerReason            AnomalyTrigger        @map("trigger_reason")
+  baselineExpectedVelocity Decimal               @map("baseline_expected_velocity") @db.Decimal(10, 2)
+  observedCurrentVelocity  Decimal               @map("observed_current_velocity") @db.Decimal(10, 2)
+  deviationPercentage      Float                 @map("deviation_percentage")
+  currentStatus            FlagStatus            @default(PENDING) @map("current_status")
+  ownerRemarks             String?               @map("owner_remarks")
+  automatedReminderSent    Boolean               @default(false) @map("automated_reminder_sent")
+  resolvedAt               DateTime?             @map("resolved_at")
+  createdAt                DateTime              @default(now()) @map("created_at")
+
+  @@index([currentStatus])
+  @@map("cashflow_anomaly_flags")
+}
+
