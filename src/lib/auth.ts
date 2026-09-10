@@ -32,21 +32,34 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   providers: [
     Credentials({
-      name: "WhatsApp OTP",
+      name: "Dual Auth (Password/PIN & WhatsApp OTP)",
       credentials: {
-        phone: { label: "Phone Number", type: "tel" },
+        phone: { label: "Phone / Email", type: "text" },
+        password: { label: "Password or PIN", type: "password" },
         otp: { label: "OTP Code", type: "text" },
         role: { label: "Role", type: "text" },
+        authMode: { label: "Auth Mode", type: "text" }, // "PASSWORD" or "OTP"
       },
       async authorize(credentials) {
         const phone = credentials?.phone as string;
+        const password = credentials?.password as string;
         const otp = credentials?.otp as string;
         const requestedRole = (credentials?.role as UserRole) || "PARENT";
+        const authMode = credentials?.authMode as string;
 
-        if (!phone || !otp) return null;
+        if (!phone) return null;
 
-        const isValid = await verifyOTP(phone, otp);
-        if (!isValid) return null;
+        // Check verification based on Auth Mode
+        if (authMode === "PASSWORD" || password) {
+          // Validate password or quick PIN (Accepts 'pass1234', '1234', or any 4+ char password during dev/demo)
+          const isValidPassword = password && (password.length >= 4);
+          if (!isValidPassword) return null;
+        } else if (otp) {
+          const isValidOtp = await verifyOTP(phone, otp);
+          if (!isValidOtp) return null;
+        } else {
+          return null;
+        }
 
         try {
           // Find or auto-provision user during dev/demo phase
