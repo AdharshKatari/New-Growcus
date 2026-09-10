@@ -87,9 +87,51 @@ export default function MarketplaceHomePage() {
       affiliationNo: "IB/2018/0094",
       image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&auto=format&fit=crop&q=80",
     },
+    {
+      id: "sch-4",
+      name: "Delhi Public Global Campus",
+      location: "HSR Layout Sector 1, Bengaluru",
+      boardType: "CBSE",
+      feeRange: { min: 95000, max: 155000 },
+      rating: 4.8,
+      reviewCount: 220,
+      featured: false,
+      facilities: ["Astronomy Observatory", "Indoor Badminton", "Robotics"],
+      passRate: "99.4%",
+      affiliationNo: "CBSE/2020/5531",
+      image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&auto=format&fit=crop&q=80",
+    },
+    {
+      id: "sch-5",
+      name: "Greenwood High International",
+      location: "Sarjapur Road, Bengaluru",
+      boardType: "ICSE",
+      feeRange: { min: 140000, max: 240000 },
+      rating: 4.9,
+      reviewCount: 410,
+      featured: true,
+      facilities: ["Bilingual Curriculum", "Heated Pool", "Tennis Court"],
+      passRate: "100%",
+      affiliationNo: "ICSE/2016/1104",
+      image: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&auto=format&fit=crop&q=80",
+    },
+    {
+      id: "sch-6",
+      name: "National Vidyalaya Academy",
+      location: "Jayanagar 3rd Block, Bengaluru",
+      boardType: "STATE",
+      feeRange: { min: 45000, max: 75000 },
+      rating: 4.7,
+      reviewCount: 162,
+      featured: false,
+      facilities: ["Digitized Library", "Science Park", "Cricket Academy"],
+      passRate: "98.8%",
+      affiliationNo: "KAR/2017/4491",
+      image: "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=800&auto=format&fit=crop&q=80",
+    },
   ];
 
-  const inforidaModules = [
+  const erpFeaturePillars = [
     {
       icon: CreditCard,
       color: "bg-emerald-50 text-emerald-700 border-emerald-200",
@@ -153,11 +195,11 @@ export default function MarketplaceHomePage() {
 
   return (
     <div className="space-y-16 py-4">
-      {/* 🚀 Inforida-Tier Hero Section */}
+      {/* Hero Section */}
       <section className="text-center max-w-4xl mx-auto space-y-8 pt-2">
         <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-900 border border-blue-200 rounded-full text-xs font-extrabold shadow-xs">
           <Sparkles className="w-4 h-4 text-blue-600 shrink-0" />
-          <span>Inforida-Tier Architecture · #1 AI-Powered School Operating Infrastructure</span>
+          <span>Growcus Enterprise · #1 AI-Powered School Operating Infrastructure</span>
         </div>
 
         <h1 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight">
@@ -229,12 +271,12 @@ export default function MarketplaceHomePage() {
         </form>
       </section>
 
-      {/* 🚀 Inforida-Tier Infinite School Marquee Banner */}
+      {/* Infinite School Marquee Banner */}
       <section className="-mx-4 md:-mx-8">
         <SchoolMarquee />
       </section>
 
-      {/* 🏛️ Inforida-Style Core Feature Pillars */}
+      {/* Core Feature Pillars */}
       <section className="space-y-6">
         <div className="text-center max-w-2xl mx-auto space-y-2">
           <span className="px-3 py-1 bg-blue-100 text-blue-800 text-[11px] font-bold rounded-full border border-blue-200">
@@ -249,7 +291,7 @@ export default function MarketplaceHomePage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {inforidaModules.map((m) => {
+          {erpFeaturePillars.map((m) => {
             const Icon = m.icon;
             return (
               <div key={m.title} className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs hover:shadow-md transition-all space-y-3 flex flex-col justify-between">

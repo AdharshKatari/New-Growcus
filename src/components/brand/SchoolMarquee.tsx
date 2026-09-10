@@ -1,5 +1,5 @@
 import React from "react";
-import { CheckCircle2, ShieldCheck, Star, Award, Sparkles, Building2 } from "lucide-react";
+import { ShieldCheck, Star, Building2 } from "lucide-react";
 
 const partnerSchools = [
   { name: "Delhi Public School", city: "New Delhi", board: "CBSE", rating: 4.9, students: "3,200 Students" },

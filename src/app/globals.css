@@ -5,10 +5,10 @@
 
 @theme inline {
   /* ─── Role-Based Psychological Color Themes ─────────────────────────── */
-  /* ADMIN: Royal Blue Authority */
-  --color-admin-primary:     oklch(0.42 0.22 264);   /* #1D4ED8 Royal Blue */
-  --color-admin-dark:        oklch(0.18 0.06 264);   /* #0B192C Command Navy */
-  --color-admin-badge:       oklch(0.92 0.05 264);
+  /* ADMIN: Balanced Royal Blue Authority (Vibrant, Not Overly Dark/Intense) */
+  --color-admin-primary:     oklch(0.55 0.20 260);   /* #2563EB Vibrant Royal Blue */
+  --color-admin-dark:        oklch(0.32 0.14 260);   /* #1E3A8A Balanced Royal Navy */
+  --color-admin-badge:       oklch(0.94 0.04 260);
 
   /* PARENT: Trust & Warm Security Emerald */
   --color-parent-primary:    oklch(0.52 0.17 162);   /* #059669 Trust Emerald */
@@ -29,7 +29,7 @@
   --color-canvas:            oklch(1 0 0);           /* #FFFFFF */
   --color-canvas-soft:       oklch(0.985 0.003 247); /* #F8FAFC crisp canvas */
 
-  --color-navy:              oklch(0.14 0.04 264);   /* #090D16 High-contrast slate font */
+  --color-navy:              oklch(0.14 0.04 264);   /* High-contrast slate font */
   --color-navy-light:        oklch(0.22 0.04 264);
   
   --color-border:            oklch(0.90 0.01 264);   /* Crisp, visible borders */

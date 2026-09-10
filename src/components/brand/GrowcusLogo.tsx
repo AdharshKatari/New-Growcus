@@ -14,10 +14,10 @@ export function GrowcusLogo({
   showText = true,
 }: GrowcusLogoProps) {
   const iconSizes = {
-    sm: "w-7 h-7",
-    md: "w-9 h-9",
-    lg: "w-11 h-11",
-    xl: "w-14 h-14",
+    sm: "w-8 h-8",
+    md: "w-10 h-10",
+    lg: "w-12 h-12",
+    xl: "w-16 h-16",
   };
 
   const textSizes = {
@@ -28,58 +28,14 @@ export function GrowcusLogo({
   };
 
   return (
-    <div className={`flex items-center gap-3 ${className}`}>
-      {/* Impressive SVG Emblem: Shield + Rising Node + Spark */}
+    <div className={`flex items-center gap-2.5 ${className}`}>
+      {/* User's High-Res 3D Metallic Shield Emblem */}
       <div className={`relative shrink-0 ${iconSizes[size]}`}>
-        <svg
-          viewBox="0 0 100 100"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-full h-full drop-shadow-md"
-        >
-          <defs>
-            <linearGradient id="growcusGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#2563EB" />
-              <stop offset="50%" stopColor="#059669" />
-              <stop offset="100%" stopColor="#7C3AED" />
-            </linearGradient>
-            <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#0F172A" />
-              <stop offset="100%" stopColor="#1E293B" />
-            </linearGradient>
-            <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur stdDeviation="4" result="blur" />
-              <feComposite in="SourceGraphic" in2="blur" operator="over" />
-            </filter>
-          </defs>
-
-          {/* Outer Shield Container */}
-          <path
-            d="M50 8L88 22V52C88 74.4 71.8 90.8 50 96C28.2 90.8 12 74.4 12 52V22L50 8Z"
-            fill="url(#shieldGrad)"
-            stroke="url(#growcusGrad)"
-            strokeWidth="3.5"
-          />
-
-          {/* Inner Rising Growth Arch (G Symbol) */}
-          <path
-            d="M32 46C32 36.06 40.06 28 50 28C59.94 28 68 36.06 68 46V54C68 63.94 59.94 72 50 72C40.06 72 32 63.94 32 54"
-            stroke="url(#growcusGrad)"
-            strokeWidth="7"
-            strokeLinecap="round"
-          />
-
-          {/* Growth Node Bar */}
-          <path
-            d="M50 50H74"
-            stroke="#10B981"
-            strokeWidth="7"
-            strokeLinecap="round"
-          />
-
-          {/* Spark Star */}
-          <circle cx="50" cy="50" r="4" fill="#F59E0B" filter="url(#glow)" />
-        </svg>
+        <img
+          src="/brand/growcus-shield-logo.png"
+          alt="Growcus Shield Emblem"
+          className="w-full h-full object-contain drop-shadow-md"
+        />
       </div>
 
       {showText && (
@@ -90,7 +46,7 @@ export function GrowcusLogo({
                 ? "text-white"
                 : variant === "dark"
                 ? "text-slate-950"
-                : "bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent"
+                : "bg-gradient-to-r from-blue-700 via-indigo-700 to-blue-900 bg-clip-text text-transparent"
             }`}
           >
             Growcus
