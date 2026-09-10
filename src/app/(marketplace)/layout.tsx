@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import Link from "next/link";
 import { GrowcusLogo } from "@/components/brand/GrowcusLogo";
-import { ArrowRight, Building2 } from "lucide-react";
+import { ArrowRight, Building2, Layers } from "lucide-react";
 
 export default function MarketplaceLayout({ children }: { children: ReactNode }) {
   return (
@@ -14,14 +14,16 @@ export default function MarketplaceLayout({ children }: { children: ReactNode })
 
         <nav className="hidden md:flex items-center gap-6 text-xs font-semibold text-slate-600">
           <Link href="/search" className="hover:text-slate-900 transition-colors">Find Schools</Link>
+          <Link href="/features" className="hover:text-slate-900 transition-colors flex items-center gap-1">
+            <Layers className="w-3.5 h-3.5 text-indigo-600" />
+            ERP Modules
+          </Link>
           <Link href="/pricing" className="text-blue-600 font-bold hover:text-blue-800 transition-colors flex items-center gap-1">
             <Building2 className="w-3.5 h-3.5" />
-            Pricing & ERP for Schools
+            Pricing & For Schools
           </Link>
           <Link href="/compare" className="hover:text-slate-900 transition-colors">Compare (40 Metrics)</Link>
-          <Link href="/fee-estimator" className="hover:text-slate-900 transition-colors">Fee Estimator</Link>
           <Link href="/bus-routes" className="hover:text-slate-900 transition-colors">Bus Simulator</Link>
-          <Link href="/events" className="hover:text-slate-900 transition-colors">Live Webinars</Link>
         </nav>
 
         <div className="flex items-center gap-3">
@@ -34,7 +36,7 @@ export default function MarketplaceLayout({ children }: { children: ReactNode })
 
           <Link
             href="/login"
-            className="px-4 py-2 bg-gradient-to-r from-slate-900 to-indigo-950 hover:from-slate-800 hover:to-indigo-900 text-white text-xs font-bold rounded-lg shadow-sm transition-all active:scale-[0.98]"
+            className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-lg shadow-sm transition-all active:scale-[0.98]"
           >
             Portal Login
           </Link>
@@ -54,10 +56,10 @@ export default function MarketplaceLayout({ children }: { children: ReactNode })
             </div>
           </div>
           <div className="flex flex-wrap gap-4 text-[11px]">
+            <Link href="/features" className="hover:text-white transition-colors">ERP Modules & Features</Link>
             <Link href="/pricing" className="text-blue-400 font-bold hover:text-white transition-colors">
               School ERP Pricing & Plans
             </Link>
-            <Link href="/help" className="hover:text-white transition-colors">Public Support Node</Link>
             <Link href="/login" className="hover:text-white transition-colors">School ERP Admin Login</Link>
           </div>
         </div>
