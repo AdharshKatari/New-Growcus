@@ -27,7 +27,9 @@ const roleConfig: Record<
   RoleTab,
   {
     icon: typeof Shield;
-    gradient: string;
+    bg: string;
+    text: string;
+    badgeBg: string;
     label: string;
     desc: string;
     demoPhone: string;
@@ -36,33 +38,41 @@ const roleConfig: Record<
 > = {
   ADMIN: {
     icon: Shield,
-    gradient: "from-blue-600 to-indigo-700",
+    bg: "bg-blue-600",
+    text: "text-blue-700",
+    badgeBg: "bg-blue-50 text-blue-800 border-blue-200",
     label: "Admin",
-    desc: "Executive Control & Finance",
+    desc: "Institutional Control & Finance",
     demoPhone: "9876543210",
     demoName: "Principal Dr. Sharma",
   },
   TEACHER: {
     icon: BookOpen,
-    gradient: "from-violet-600 to-purple-700",
+    bg: "bg-violet-600",
+    text: "text-violet-700",
+    badgeBg: "bg-violet-50 text-violet-800 border-violet-200",
     label: "Teacher",
-    desc: "Classroom & Gradebook Hub",
+    desc: "Classroom & Attendance Hub",
     demoPhone: "9812345678",
     demoName: "Meera Ma'am (Class 8-A)",
   },
   STUDENT: {
     icon: GraduationCap,
-    gradient: "from-cyan-500 to-blue-600",
+    bg: "bg-cyan-600",
+    text: "text-cyan-700",
+    badgeBg: "bg-cyan-50 text-cyan-800 border-cyan-200",
     label: "Student",
-    desc: "Learning Portal & Quizzes",
+    desc: "Learning Portal & Assignments",
     demoPhone: "9765432109",
     demoName: "Aarav Sharma (Roll #01)",
   },
   PARENT: {
     icon: Users,
-    gradient: "from-emerald-500 to-teal-600",
+    bg: "bg-emerald-600",
+    text: "text-emerald-700",
+    badgeBg: "bg-emerald-50 text-emerald-800 border-emerald-200",
     label: "Parent",
-    desc: "Child Monitoring & UPI Fees",
+    desc: "Child Monitoring & Instant UPI Fees",
     demoPhone: "9988776655",
     demoName: "Rajesh Sharma (Parent)",
   },
@@ -93,7 +103,7 @@ export default function LoginPage() {
 
     setError("");
     setLoading(true);
-    setStatusMsg("Verifying PIN & Security Credentials...");
+    setStatusMsg("Verifying Credentials...");
 
     try {
       const res = await signIn("credentials", {
@@ -109,7 +119,7 @@ export default function LoginPage() {
         setLoading(false);
         setStatusMsg("");
       } else {
-        setStatusMsg("Access Granted! Routing to portal...");
+        setStatusMsg("Access Granted! Opening portal...");
         await new Promise((r) => setTimeout(r, 400));
         const dest =
           role === "ADMIN"
@@ -136,7 +146,7 @@ export default function LoginPage() {
     }
     setError("");
     setLoading(true);
-    setStatusMsg("Dispatching recovery OTP via WhatsApp Business API...");
+    setStatusMsg("Sending recovery OTP via WhatsApp...");
 
     try {
       const res = await fetch("/api/v1/otp/send", {
@@ -147,7 +157,7 @@ export default function LoginPage() {
       const data = await res.json();
 
       if (data.success) {
-        setStatusMsg("Recovery Code Sent! Redirecting to OTP Verification...");
+        setStatusMsg("Recovery Code Sent! Redirecting...");
         await new Promise((r) => setTimeout(r, 300));
         router.push(`/verify?phone=${encodeURIComponent(phone)}&role=${role}`);
       } else {
@@ -169,7 +179,7 @@ export default function LoginPage() {
     setPhone(d.demoPhone);
     setPin("1234");
     setLoading(true);
-    setStatusMsg(`Logging into ${d.label} Portal...`);
+    setStatusMsg(`Signing in as ${d.label}...`);
 
     try {
       const res = await signIn("credentials", {
@@ -205,35 +215,27 @@ export default function LoginPage() {
   const RoleIcon = currentRole.icon;
 
   return (
-    <div className="bg-white/[0.08] backdrop-blur-2xl rounded-2xl border border-white/[0.12] p-6 md:p-8 shadow-2xl relative overflow-hidden">
-      {/* Top Accent Bar */}
-      <div
-        className={cn(
-          "absolute top-0 left-0 right-0 h-1 bg-gradient-to-r transition-all duration-300",
-          currentRole.gradient
-        )}
-      />
-
-      {/* Header */}
+    <div className="bg-white rounded-2xl border border-slate-200 p-6 md:p-8 shadow-lg relative">
+      {/* Top Header */}
       <div className="text-center mb-6">
         <div
           className={cn(
-            "w-14 h-14 rounded-2xl bg-gradient-to-br mx-auto mb-3 flex items-center justify-center shadow-xl transition-all duration-300",
-            currentRole.gradient
+            "w-12 h-12 rounded-xl mx-auto mb-3 flex items-center justify-center text-white shadow-sm transition-all",
+            currentRole.bg
           )}
         >
-          <RoleIcon className="w-7 h-7 text-white" />
+          <RoleIcon className="w-6 h-6 text-white" />
         </div>
-        <h1 className="text-xl font-bold text-white tracking-tight">
-          Unified Multi-Portal Gateway
+        <h1 className="text-xl font-bold text-slate-900 tracking-tight">
+          Unified Multi-Portal Access
         </h1>
-        <p className="text-xs text-blue-200/70 mt-1">
+        <p className="text-xs text-slate-500 mt-1">
           {currentRole.desc}
         </p>
       </div>
 
       {/* Role Switcher Tabs */}
-      <div className="grid grid-cols-4 gap-1.5 p-1.5 bg-white/[0.06] rounded-xl mb-6 text-center text-xs font-semibold border border-white/[0.06]">
+      <div className="grid grid-cols-4 gap-1 p-1 bg-slate-100 rounded-xl mb-6 text-center text-xs font-semibold">
         {(["ADMIN", "TEACHER", "STUDENT", "PARENT"] as RoleTab[]).map((tab) => {
           const TabIcon = roleConfig[tab].icon;
           return (
@@ -245,10 +247,10 @@ export default function LoginPage() {
                 setPhone(roleConfig[tab].demoPhone);
               }}
               className={cn(
-                "py-2.5 rounded-lg transition-all duration-200 flex flex-col items-center gap-1",
+                "py-2 rounded-lg transition-all flex flex-col items-center gap-1",
                 role === tab
-                  ? `bg-gradient-to-br ${roleConfig[tab].gradient} text-white shadow-lg font-bold scale-[1.02]`
-                  : "text-blue-200/60 hover:text-white hover:bg-white/[0.06]"
+                  ? "bg-white text-slate-900 shadow-sm font-bold scale-[1.02]"
+                  : "text-slate-500 hover:text-slate-900"
               )}
             >
               <TabIcon className="w-3.5 h-3.5" />
@@ -258,14 +260,14 @@ export default function LoginPage() {
         })}
       </div>
 
-      {/* 🔒 MODE A: PRIMARY PIN LOGIN FORM */}
+      {/* 🔒 PRIMARY PIN LOGIN FORM */}
       <form onSubmit={handlePinLogin} className="space-y-4">
         <div>
-          <label className="block text-xs font-semibold text-blue-100/80 mb-1.5">
+          <label className="block text-xs font-semibold text-slate-700 mb-1">
             Registered Mobile Number
           </label>
           <div className="relative">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-blue-200/60">
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-500">
               +91
             </span>
             <input
@@ -275,15 +277,15 @@ export default function LoginPage() {
               placeholder="98765 43210"
               maxLength={10}
               disabled={loading}
-              className="w-full pl-12 pr-10 py-3 text-sm bg-white/[0.06] border border-white/[0.1] rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400/50 text-white placeholder:text-blue-200/30 font-mono transition-all"
+              className="w-full pl-12 pr-10 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-900 text-slate-900 font-mono transition-all"
             />
-            <Phone className="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 text-blue-300/40" />
+            <Phone className="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 text-slate-400" />
           </div>
         </div>
 
         <div>
-          <div className="flex justify-between items-center mb-1.5">
-            <label className="block text-xs font-semibold text-blue-100/80">
+          <div className="flex justify-between items-center mb-1">
+            <label className="block text-xs font-semibold text-slate-700">
               4-Digit Security PIN
             </label>
           </div>
@@ -292,91 +294,87 @@ export default function LoginPage() {
               type={showPin ? "text" : "password"}
               value={pin}
               onChange={(e) => setPin(e.target.value)}
-              placeholder="Enter 4-digit PIN (default: 1234)"
+              placeholder="Enter PIN (default: 1234)"
               maxLength={8}
               disabled={loading}
-              className="w-full pl-10 pr-10 py-3 text-sm bg-white/[0.06] border border-white/[0.1] rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400/50 text-white placeholder:text-blue-200/30 transition-all font-mono tracking-wider"
+              className="w-full pl-10 pr-10 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-900 text-slate-900 font-mono tracking-wider transition-all"
             />
-            <KeyRound className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-blue-300/40" />
+            <KeyRound className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
             <button
               type="button"
               onClick={() => setShowPin(!showPin)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-blue-300/50 hover:text-white"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700"
             >
               {showPin ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             </button>
           </div>
         </div>
 
-        {/* Remember Me & Recovery Links */}
-        <div className="flex items-center justify-between text-xs text-blue-200/70 pt-1">
+        {/* Remember Me & Recovery */}
+        <div className="flex items-center justify-between text-xs text-slate-600 pt-1">
           <label className="flex items-center gap-2 cursor-pointer select-none">
             <input
               type="checkbox"
               checked={rememberMe}
               onChange={(e) => setRememberMe(e.target.checked)}
-              className="rounded bg-white/10 border-white/20 text-blue-500 focus:ring-0"
+              className="rounded bg-slate-100 border-slate-300 text-slate-900 focus:ring-0"
             />
             <span>Stay Signed In</span>
           </label>
-          
+
           <button
             type="button"
             onClick={handleForgotPinOtp}
-            className="font-semibold text-emerald-400 hover:text-emerald-300 flex items-center gap-1 hover:underline transition-colors"
+            className="font-semibold text-emerald-600 hover:text-emerald-800 flex items-center gap-1 hover:underline transition-colors"
           >
             <MessageSquare className="w-3 h-3" />
             <span>Forgot PIN? WhatsApp OTP →</span>
           </button>
         </div>
 
-        {/* Live Loading Status */}
+        {/* Status */}
         {loading && (
-          <div className="p-3 bg-blue-500/15 border border-blue-400/30 rounded-xl flex items-center justify-center gap-3 text-blue-200 text-xs font-semibold backdrop-blur-sm animate-pulse">
-            <Loader2 className="w-4 h-4 text-blue-400 animate-spin shrink-0" />
+          <div className="p-3 bg-blue-50 border border-blue-200 rounded-xl flex items-center justify-center gap-2 text-blue-800 text-xs font-semibold">
+            <Loader2 className="w-4 h-4 text-blue-600 animate-spin shrink-0" />
             <span>{statusMsg || "Authenticating..."}</span>
           </div>
         )}
 
-        {/* Error Feedback */}
+        {/* Error */}
         {error && (
-          <div className="p-3 bg-red-500/20 text-red-200 text-xs font-medium rounded-xl border border-red-500/30 backdrop-blur-sm">
+          <div className="p-3 bg-rose-50 text-rose-700 text-xs font-medium rounded-xl border border-rose-200">
             {error}
           </div>
         )}
 
-        {/* Primary Submit Button */}
+        {/* Submit */}
         <button
           type="submit"
           disabled={loading}
-          className={cn(
-            "w-full py-3.5 text-white font-bold text-xs rounded-xl shadow-xl flex items-center justify-center gap-2 transition-all duration-200 active:scale-[0.98] bg-gradient-to-r",
-            currentRole.gradient,
-            loading ? "opacity-70 cursor-not-allowed" : "hover:shadow-2xl hover:brightness-110"
-          )}
+          className="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl shadow-sm flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
         >
           {loading ? (
             <>
               <Loader2 className="w-4 h-4 animate-spin" />
-              <span>Verifying PIN...</span>
+              <span>Verifying...</span>
             </>
           ) : (
             <>
-              <span>Sign In with PIN ({currentRole.label})</span>
+              <span>Sign In to {currentRole.label} Portal</span>
               <ArrowRight className="w-4 h-4" />
             </>
           )}
         </button>
       </form>
 
-      {/* ⚡ 1-Click Instant Demo Login Buttons */}
-      <div className="mt-6 pt-5 border-t border-white/[0.08]">
+      {/* ⚡ 1-Click Demo Login */}
+      <div className="mt-6 pt-4 border-t border-slate-100">
         <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-1.5 text-xs font-bold text-amber-300">
-            <Zap className="w-3.5 h-3.5 fill-amber-300" />
-            <span>1-Click Instant Demo Access</span>
+          <div className="flex items-center gap-1.5 text-xs font-bold text-amber-700">
+            <Zap className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
+            <span>1-Click Quick Demo Access</span>
           </div>
-          <span className="text-[10px] text-blue-200/50">Skip PIN</span>
+          <span className="text-[10px] text-slate-400">Skip PIN</span>
         </div>
         <div className="grid grid-cols-2 gap-2">
           {(["ADMIN", "TEACHER", "PARENT", "STUDENT"] as RoleTab[]).map((tab) => {
@@ -388,14 +386,14 @@ export default function LoginPage() {
                 type="button"
                 disabled={loading}
                 onClick={() => handleQuickDemoLogin(tab)}
-                className="flex items-center gap-2 p-2.5 bg-white/[0.04] hover:bg-white/[0.1] border border-white/[0.08] hover:border-white/[0.2] rounded-xl text-left transition-all text-xs group"
+                className="flex items-center gap-2 p-2.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl text-left transition-all text-xs group"
               >
-                <div className={cn("w-7 h-7 rounded-lg bg-gradient-to-br flex items-center justify-center shrink-0 text-white shadow-sm", d.gradient)}>
+                <div className={cn("w-7 h-7 rounded-lg flex items-center justify-center shrink-0 text-white shadow-xs", d.bg)}>
                   <Icon className="w-3.5 h-3.5" />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="font-bold text-white group-hover:text-blue-200 truncate">{d.label}</p>
-                  <p className="text-[9px] text-blue-200/50 truncate">{d.demoName}</p>
+                  <p className="font-bold text-slate-800 group-hover:text-slate-900 truncate">{d.label}</p>
+                  <p className="text-[9px] text-slate-500 truncate">{d.demoName}</p>
                 </div>
               </button>
             );
@@ -404,12 +402,12 @@ export default function LoginPage() {
       </div>
 
       {/* Dev Mode Banner */}
-      <div className="mt-4 p-2.5 bg-violet-500/10 border border-violet-400/20 rounded-xl flex items-center justify-between text-violet-200 text-[11px] font-medium backdrop-blur-sm">
+      <div className="mt-4 p-2.5 bg-violet-50 border border-violet-100 rounded-xl flex items-center justify-between text-violet-900 text-[11px] font-medium">
         <div className="flex items-center gap-2">
-          <Sparkles className="w-4 h-4 text-violet-400 shrink-0" />
-          <span>Default Security PIN: <strong className="font-mono text-violet-300 font-bold">1234</strong></span>
+          <Sparkles className="w-4 h-4 text-violet-600 shrink-0" />
+          <span>Default PIN: <strong className="font-mono text-violet-800 font-bold">1234</strong></span>
         </div>
-        <Lock className="w-3 h-3 text-violet-400" />
+        <Lock className="w-3.5 h-3.5 text-violet-500" />
       </div>
     </div>
   );
