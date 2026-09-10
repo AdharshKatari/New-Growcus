@@ -26,6 +26,8 @@ import {
   ShoppingBag,
 } from "lucide-react";
 
+import { GrowcusLogo } from "@/components/brand/GrowcusLogo";
+
 interface SidebarProps {
   role: "ADMIN" | "TEACHER" | "STUDENT" | "PARENT";
 }
@@ -137,16 +139,11 @@ export function Sidebar({ role }: SidebarProps) {
     <aside className={cn("w-64 text-white flex flex-col min-h-screen border-r shrink-0 shadow-2xl z-20 transition-colors duration-200", roleTheme.bg)}>
       {/* Brand Header */}
       <div className="p-4 border-b border-white/10 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-3">
-          <div className={cn("w-9 h-9 rounded-xl flex items-center justify-center font-black text-white text-xl shadow-lg ring-2 ring-white/20", roleTheme.badgeBg)}>
-            G
-          </div>
-          <div>
-            <span className="font-extrabold text-lg tracking-tight text-white block leading-tight">Growcus</span>
-            <span className={cn("inline-block text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider mt-0.5", roleTheme.roleBadge)}>
-              {role} PORTAL
-            </span>
-          </div>
+        <Link href="/" className="flex items-center justify-between w-full">
+          <GrowcusLogo variant="light" size="sm" />
+          <span className={cn("inline-block text-[9px] px-2 py-0.5 rounded-full font-extrabold uppercase tracking-wider", roleTheme.roleBadge)}>
+            {role}
+          </span>
         </Link>
       </div>
 
