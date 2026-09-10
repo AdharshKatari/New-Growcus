@@ -1,0 +1,246 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum BoardType {
+  CBSE
+  ICSE
+  STATE
+}
+
+enum UserRole {
+  ADMIN
+  TEACHER
+  STUDENT
+  PARENT
+}
+
+enum FeeStatus {
+  SETTLED
+  PENDING
+  FAILED
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  LATE
+}
+
+enum LeadStage {
+  LEAD
+  INQUIRY
+  INTERVIEW
+  DOC_REVIEW
+  REGISTERED
+}
+
+enum NotificationChannel {
+  PWA
+  WHATSAPP
+  SMS
+}
+
+model School {
+  id          String   @id @default(uuid()) @db.Uuid
+  name        String
+  licenseKey  String   @unique @map("license_key")
+  boardType   BoardType @map("board_type")
+  currency    String   @default("INR")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  users           User[]
+  students        Student[]
+  teachers        Teacher[]
+  feeLedgers      FeeLedger[]
+  attendanceLogs  AttendanceLog[]
+  admissionLeads  AdmissionLead[]
+  timetables      Timetable[]
+  inventoryItems  InventoryItem[]
+  transportRoutes TransportRoute[]
+  notifications   Notification[]
+
+  @@map("schools")
+}
+
+model User {
+  id        String   @id @default(uuid()) @db.Uuid
+  schoolId  String   @map("school_id") @db.Uuid
+  phone     String   @unique
+  role      UserRole @default(PARENT)
+  name      String?
+  createdAt DateTime @default(now()) @map("created_at")
+
+  school    School   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  otpTokens OtpToken[]
+  teachers  Teacher[]
+
+  @@index([schoolId, phone])
+  @@map("users")
+}
+
+model OtpToken {
+  id        String    @id @default(uuid()) @db.Uuid
+  userId    String    @map("user_id") @db.Uuid
+  phone     String
+  code      String    // SHA-256 hashed code
+  expiresAt DateTime  @map("expires_at")
+  usedAt    DateTime? @map("used_at")
+  attempts  Int       @default(0)
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([phone])
+  @@map("otp_tokens")
+}
+
+model Student {
+  id           String   @id @default(uuid()) @db.Uuid
+  schoolId     String   @map("school_id") @db.Uuid
+  firstName    String   @map("first_name")
+  lastName     String   @map("last_name")
+  rollNumber   Int      @map("roll_number")
+  classSection String   @map("class_section")
+  parentPhone  String   @map("parent_phone")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  school         School          @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  feeLedgers     FeeLedger[]
+  attendanceLogs AttendanceLog[]
+
+  @@index([schoolId, classSection, parentPhone])
+  @@map("students")
+}
+
+model Teacher {
+  id            String   @id @default(uuid()) @db.Uuid
+  schoolId      String   @map("school_id") @db.Uuid
+  userId        String   @map("user_id") @db.Uuid
+  subjects      String[]
+  classAssigned String   @map("class_assigned")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  school    School      @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  timetables Timetable[]
+
+  @@map("teachers")
+}
+
+model FeeLedger {
+  id         String    @id @default(uuid()) @db.Uuid
+  studentId  String    @map("student_id") @db.Uuid
+  schoolId   String    @map("school_id") @db.Uuid
+  amountDue  Decimal   @map("amount_due") @db.Decimal(12, 2)
+  amountPaid Decimal   @default(0.00) @map("amount_paid") @db.Decimal(12, 2)
+  status     FeeStatus @default(PENDING)
+  upiTxnId   String?   @unique @map("upi_txn_id")
+  updatedAt  DateTime  @default(now()) @updatedAt @map("updated_at")
+
+  student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  school  School  @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  @@index([schoolId, status])
+  @@map("fee_ledgers")
+}
+
+model AttendanceLog {
+  id        String           @id @default(uuid()) @db.Uuid
+  studentId String           @map("student_id") @db.Uuid
+  schoolId  String           @map("school_id") @db.Uuid
+  date      DateTime         @db.Date
+  status    AttendanceStatus @default(PRESENT)
+
+  student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  school  School  @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  @@unique([studentId, date])
+  @@index([schoolId, date])
+  @@map("attendance_logs")
+}
+
+model AdmissionLead {
+  id          String    @id @default(uuid()) @db.Uuid
+  schoolId    String    @map("school_id") @db.Uuid
+  studentName String    @map("student_name")
+  parentName  String    @map("parent_name")
+  phone       String
+  grade       String
+  stage       LeadStage @default(LEAD)
+  notes       String?
+  createdAt   DateTime  @default(now()) @map("created_at")
+
+  school School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  @@index([schoolId, stage])
+  @@map("admission_leads")
+}
+
+model Timetable {
+  id           String   @id @default(uuid()) @db.Uuid
+  schoolId     String   @map("school_id") @db.Uuid
+  teacherId    String   @map("teacher_id") @db.Uuid
+  classSection String   @map("class_section")
+  subject      String
+  dayOfWeek    Int      @map("day_of_week") // 1-7
+  period       Int
+
+  school  School  @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  teacher Teacher @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+
+  @@index([schoolId, classSection])
+  @@map("timetables")
+}
+
+model InventoryItem {
+  id               String   @id @default(uuid()) @db.Uuid
+  schoolId         String   @map("school_id") @db.Uuid
+  name             String
+  quantity         Int
+  reorderThreshold Int      @map("reorder_threshold")
+  unitPrice        Decimal  @map("unit_price") @db.Decimal(10, 2)
+  updatedAt        DateTime @default(now()) @updatedAt @map("updated_at")
+
+  school School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  @@index([schoolId])
+  @@map("inventory_items")
+}
+
+model TransportRoute {
+  id            String   @id @default(uuid()) @db.Uuid
+  schoolId      String   @map("school_id") @db.Uuid
+  routeName     String   @map("route_name")
+  driverName    String   @map("driver_name")
+  driverPhone   String   @map("driver_phone")
+  vehicleNumber String   @map("vehicle_number")
+  stops         Json     // Array of stop objects with ETA
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  school School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  @@index([schoolId])
+  @@map("transport_routes")
+}
+
+model Notification {
+  id          String              @id @default(uuid()) @db.Uuid
+  schoolId    String              @map("school_id") @db.Uuid
+  recipientId String              @map("recipient_id")
+  channel     NotificationChannel
+  message     String
+  status      String              @default("SENT")
+  createdAt   DateTime            @default(now()) @map("created_at")
+
+  school School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  @@index([schoolId, recipientId])
+  @@map("notifications")
+}
