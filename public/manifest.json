@@ -1,0 +1,22 @@
+{
+  "name": "Growcus — School Discovery & Enterprise ERP",
+  "short_name": "Growcus",
+  "description": "Hybrid B2C school discovery marketplace, modular school ERP, and AI teacher co-pilot.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#1d4ed8",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
