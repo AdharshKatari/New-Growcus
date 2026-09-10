@@ -92,17 +92,58 @@ export function Sidebar({ role }: SidebarProps) {
       ? studentNav
       : parentNav;
 
+  const roleTheme =
+    role === "ADMIN"
+      ? {
+          bg: "bg-slate-950 border-blue-900/40",
+          badgeBg: "bg-blue-600",
+          roleBadge: "bg-blue-500/20 text-blue-300 border border-blue-500/30",
+          activeBg: "bg-blue-600 text-white shadow-md shadow-blue-900/30 border-l-4 border-blue-400 font-bold",
+          hoverBg: "hover:bg-slate-900 hover:text-white text-slate-300",
+          iconActive: "text-white",
+          iconInactive: "text-blue-400/70",
+        }
+      : role === "PARENT"
+      ? {
+          bg: "bg-emerald-950 border-emerald-900/40",
+          badgeBg: "bg-emerald-600",
+          roleBadge: "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30",
+          activeBg: "bg-emerald-600 text-white shadow-md shadow-emerald-900/30 border-l-4 border-emerald-400 font-bold",
+          hoverBg: "hover:bg-emerald-900/60 hover:text-white text-emerald-200/80",
+          iconActive: "text-white",
+          iconInactive: "text-emerald-400/70",
+        }
+      : role === "TEACHER"
+      ? {
+          bg: "bg-indigo-950 border-indigo-900/40",
+          badgeBg: "bg-violet-600",
+          roleBadge: "bg-violet-500/20 text-violet-300 border border-violet-500/30",
+          activeBg: "bg-violet-600 text-white shadow-md shadow-violet-900/30 border-l-4 border-violet-400 font-bold",
+          hoverBg: "hover:bg-indigo-900/60 hover:text-white text-indigo-200/80",
+          iconActive: "text-white",
+          iconInactive: "text-violet-400/70",
+        }
+      : {
+          bg: "bg-slate-950 border-cyan-900/40",
+          badgeBg: "bg-cyan-600",
+          roleBadge: "bg-cyan-500/20 text-cyan-300 border border-cyan-500/30",
+          activeBg: "bg-gradient-to-r from-cyan-600 to-amber-500 text-white shadow-md shadow-cyan-900/30 border-l-4 border-amber-400 font-bold",
+          hoverBg: "hover:bg-slate-900 hover:text-white text-slate-300",
+          iconActive: "text-white",
+          iconInactive: "text-cyan-400/70",
+        };
+
   return (
-    <aside className="w-60 bg-[--color-navy] text-white flex flex-col min-h-screen border-r border-slate-800 shrink-0">
+    <aside className={cn("w-64 text-white flex flex-col min-h-screen border-r shrink-0 shadow-2xl z-20 transition-colors duration-200", roleTheme.bg)}>
       {/* Brand Header */}
-      <div className="p-4 border-b border-slate-800 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-[--color-pay] flex items-center bg-emerald-500 font-bold text-white justify-center text-lg">
+      <div className="p-4 border-b border-white/10 flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-3">
+          <div className={cn("w-9 h-9 rounded-xl flex items-center justify-center font-black text-white text-xl shadow-lg ring-2 ring-white/20", roleTheme.badgeBg)}>
             G
           </div>
           <div>
-            <span className="font-bold text-lg tracking-tight text-white">Growcus</span>
-            <span className="block text-[10px] text-slate-400 -mt-1 font-medium">
+            <span className="font-extrabold text-lg tracking-tight text-white block leading-tight">Growcus</span>
+            <span className={cn("inline-block text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider mt-0.5", roleTheme.roleBadge)}>
               {role} PORTAL
             </span>
           </div>
@@ -114,30 +155,22 @@ export function Sidebar({ role }: SidebarProps) {
         {items.map((item) => {
           const Icon = item.icon;
           const isActive = pathname === item.href;
-          const isAi = item.name.includes("AI") || item.name.includes("Orbit");
-          const isPay = item.name.includes("UPI");
 
           return (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-medium transition-all duration-150",
+                "flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-xs font-semibold transition-all duration-150 tracking-wide",
                 isActive
-                  ? "bg-slate-800 text-white shadow-sm font-semibold border-l-2 border-[--color-pay]"
-                  : "text-slate-300 hover:bg-slate-800/60 hover:text-white"
+                  ? roleTheme.activeBg
+                  : roleTheme.hoverBg
               )}
             >
               <Icon
                 className={cn(
-                  "w-4 h-4 shrink-0",
-                  isAi
-                    ? "text-[--color-ai-light]"
-                    : isPay
-                    ? "text-[--color-pay-light]"
-                    : isActive
-                    ? "text-white"
-                    : "text-slate-400"
+                  "w-4 h-4 shrink-0 transition-transform duration-150 group-hover:scale-110",
+                  isActive ? roleTheme.iconActive : roleTheme.iconInactive
                 )}
               />
               <span className="truncate">{item.name}</span>
@@ -147,9 +180,9 @@ export function Sidebar({ role }: SidebarProps) {
       </nav>
 
       {/* Footer License */}
-      <div className="p-4 border-t border-slate-800 text-[11px] text-slate-400">
-        <p className="font-medium text-slate-300">Growcus ERP v1.0</p>
-        <p className="text-[10px]">Licensed to Model Academy</p>
+      <div className="p-4 border-t border-white/10 text-[11px] text-slate-400 bg-black/20">
+        <p className="font-bold text-white">Growcus Enterprise v2.0</p>
+        <p className="text-[10px] text-slate-400">High-Margin Edge System</p>
       </div>
     </aside>
   );
