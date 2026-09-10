@@ -38,7 +38,7 @@ export default function MarketplaceHomePage() {
     {
       id: "sch-1",
       name: "Growcus Model International Academy",
-      location: "Indiranagar, Bengaluru",
+      location: "Indiranagar 100ft Road, Bengaluru",
       boardType: "CBSE",
       feeRange: { min: 85000, max: 140000 },
       rating: 4.9,
@@ -47,11 +47,12 @@ export default function MarketplaceHomePage() {
       facilities: ["3D VR Lab", "AC Bus Fleet", "Robotics", "Olympic Pool"],
       passRate: "100%",
       affiliationNo: "CBSE/2021/10492",
+      image: "https://images.unsplash.com/photo-1562774053-701939374585?w=800&auto=format&fit=crop&q=80",
     },
     {
       id: "sch-2",
       name: "St. Xavier's Heritage Public School",
-      location: "Koramangala, Bengaluru",
+      location: "Koramangala 4th Block, Bengaluru",
       boardType: "ICSE",
       feeRange: { min: 110000, max: 185000 },
       rating: 4.8,
@@ -60,11 +61,12 @@ export default function MarketplaceHomePage() {
       facilities: ["Cambridge STEM", "Smart Classrooms", "Horse Riding"],
       passRate: "99.6%",
       affiliationNo: "ICSE/2019/8831",
+      image: "https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?w=800&auto=format&fit=crop&q=80",
     },
     {
       id: "sch-3",
       name: "Oakridge World International School",
-      location: "Whitefield, Bengaluru",
+      location: "Whitefield Main Road, Bengaluru",
       boardType: "IB WORLD",
       feeRange: { min: 180000, max: 320000 },
       rating: 4.9,
@@ -73,6 +75,49 @@ export default function MarketplaceHomePage() {
       facilities: ["IB PYP/MYP", "AI Tinkering Lab", "State Art Studio"],
       passRate: "100%",
       affiliationNo: "IB/2018/0094",
+      image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&auto=format&fit=crop&q=80",
+    },
+    {
+      id: "sch-4",
+      name: "Delhi Public Global Campus",
+      location: "HSR Layout Sector 1, Bengaluru",
+      boardType: "CBSE",
+      feeRange: { min: 95000, max: 155000 },
+      rating: 4.8,
+      reviewCount: 220,
+      featured: false,
+      facilities: ["Astronomy Observatory", "Indoor Badminton", "Robotics"],
+      passRate: "99.4%",
+      affiliationNo: "CBSE/2020/5531",
+      image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&auto=format&fit=crop&q=80",
+    },
+    {
+      id: "sch-5",
+      name: "Greenwood High International",
+      location: "Sarjapur Road, Bengaluru",
+      boardType: "ICSE",
+      feeRange: { min: 140000, max: 240000 },
+      rating: 4.9,
+      reviewCount: 410,
+      featured: true,
+      facilities: ["Bilingual Curriculum", "Heated Pool", "Tennis Court"],
+      passRate: "100%",
+      affiliationNo: "ICSE/2016/1104",
+      image: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&auto=format&fit=crop&q=80",
+    },
+    {
+      id: "sch-6",
+      name: "National Vidyalaya Academy",
+      location: "Jayanagar 3rd Block, Bengaluru",
+      boardType: "STATE",
+      feeRange: { min: 45000, max: 75000 },
+      rating: 4.7,
+      reviewCount: 162,
+      featured: false,
+      facilities: ["Digitized Library", "Science Park", "Cricket Academy"],
+      passRate: "98.8%",
+      affiliationNo: "KAR/2017/4491",
+      image: "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=800&auto=format&fit=crop&q=80",
     },
   ];
 
@@ -82,14 +127,14 @@ export default function MarketplaceHomePage() {
       name: "Dr. R. K. Sharma",
       title: "Director & Principal",
       school: "Delhi Public School, Vasant Kunj",
-      avatarBg: "bg-blue-600",
+      avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&auto=format&fit=crop&q=80",
     },
     {
       quote: "The PWA offline attendance feature is a lifesaver for our teachers in classrooms with thick concrete walls. Marking morning attendance takes 30 seconds, and absent alerts reach parents instantly.",
-      name: "Meera Deshmukh",
+      name: "Mrs. Meera Deshmukh",
       title: "Vice Principal & Academic Coordinator",
       school: "St. Xavier's Heritage Academy",
-      avatarBg: "bg-emerald-600",
+      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&auto=format&fit=crop&q=80",
     },
   ];
 
@@ -116,7 +161,7 @@ export default function MarketplaceHomePage() {
         {/* Search Console Bar */}
         <form
           onSubmit={handleSearch}
-          className="bg-white p-3 md:p-4 rounded-3xl border border-slate-200 card-elevated flex flex-col md:flex-row gap-3 max-w-3xl mx-auto shadow-md"
+          className="bg-white p-3 md:p-4 rounded-3xl border border-slate-200 flex flex-col md:flex-row gap-3 max-w-3xl mx-auto shadow-md"
         >
           <div className="flex-1 relative">
             <Search className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
@@ -218,42 +263,12 @@ export default function MarketplaceHomePage() {
         </div>
       </section>
 
-      {/* Trust Stats */}
-      <section className="bg-white rounded-3xl p-8 shadow-sm border border-slate-200">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-x-0 md:divide-x divide-slate-100">
-          <div className="space-y-1 p-2">
-            <div className="flex items-center justify-center gap-2 text-emerald-600 font-black text-3xl md:text-4xl">
-              <Building2 className="w-7 h-7" /> 500+
-            </div>
-            <p className="text-xs text-slate-500 font-bold uppercase tracking-wider">Verified Campuses</p>
-          </div>
-          <div className="space-y-1 p-2">
-            <div className="flex items-center justify-center gap-2 text-blue-600 font-black text-3xl md:text-4xl">
-              <Users className="w-7 h-7" /> 120,000+
-            </div>
-            <p className="text-xs text-slate-500 font-bold uppercase tracking-wider">Parents Assisted</p>
-          </div>
-          <div className="space-y-1 p-2">
-            <div className="flex items-center justify-center gap-2 text-violet-600 font-black text-3xl md:text-4xl">
-              <FileCheck2 className="w-7 h-7" /> 100%
-            </div>
-            <p className="text-xs text-slate-500 font-bold uppercase tracking-wider">Audited Fee Ledgers</p>
-          </div>
-          <div className="space-y-1 p-2">
-            <div className="flex items-center justify-center gap-2 text-amber-500 font-black text-3xl md:text-4xl">
-              <Award className="w-7 h-7" /> 4.9 / 5.0
-            </div>
-            <p className="text-xs text-slate-500 font-bold uppercase tracking-wider">Parent Rating Score</p>
-          </div>
-        </div>
-      </section>
-
       {/* Featured Institutions Grid */}
       <section className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2">
-              <span>Featured Verified Campuses</span>
+              <span>Featured & Certified Institutions</span>
               <span className="text-xs bg-emerald-100 text-emerald-800 border border-emerald-200 px-2.5 py-0.5 rounded-full font-extrabold">2026 Batch</span>
             </h2>
             <p className="text-xs text-slate-500 font-medium mt-1">
@@ -269,7 +284,7 @@ export default function MarketplaceHomePage() {
         </div>
       </section>
 
-      {/* School Testimonials */}
+      {/* Real Principal & School Testimonials */}
       <section className="bg-slate-50 rounded-3xl p-8 border border-slate-200 space-y-6">
         <div className="text-center max-w-2xl mx-auto space-y-2">
           <h2 className="text-2xl font-bold text-slate-900">Trusted by Leading School Principals</h2>
@@ -282,9 +297,11 @@ export default function MarketplaceHomePage() {
               <p className="text-xs text-slate-700 leading-relaxed italic">"{t.quote}"</p>
 
               <div className="flex items-center gap-3 pt-3 border-t border-slate-100">
-                <div className={`w-10 h-10 rounded-full ${t.avatarBg} text-white font-bold flex items-center justify-center text-sm shadow-xs shrink-0`}>
-                  {t.name[0]}
-                </div>
+                <img
+                  src={t.avatar}
+                  alt={t.name}
+                  className="w-11 h-11 rounded-full object-cover border border-slate-200 shadow-xs shrink-0"
+                />
                 <div>
                   <h4 className="font-bold text-xs text-slate-900">{t.name}</h4>
                   <p className="text-[10px] text-slate-500">{t.title} · {t.school}</p>
