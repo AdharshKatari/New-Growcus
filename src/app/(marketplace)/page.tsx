@@ -23,6 +23,7 @@ import {
   Quote
 } from "lucide-react";
 import { SchoolCard } from "@/components/marketplace/SchoolCard";
+import { SchoolMarquee } from "@/components/brand/SchoolMarquee";
 
 export default function MarketplaceHomePage() {
   const [search, setSearch] = useState("");
@@ -196,6 +197,11 @@ export default function MarketplaceHomePage() {
             <span>Search Schools</span>
           </button>
         </form>
+      </section>
+
+      {/* 🚀 Inforida-Tier Infinite School Marquee Banner */}
+      <section className="-mx-4 md:-mx-8">
+        <SchoolMarquee />
       </section>
 
       {/* 🚀 Interactive Live Portal Demo Launcher (Public Sandbox) */}
