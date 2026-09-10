@@ -20,7 +20,16 @@ import {
   Shield,
   Layers,
   Star,
-  Quote
+  Quote,
+  CreditCard,
+  UserCheck,
+  FileSpreadsheet,
+  Bus,
+  MessageSquare,
+  Bot,
+  TrendingUp,
+  CheckCircle2,
+  Smartphone
 } from "lucide-react";
 import { SchoolCard } from "@/components/marketplace/SchoolCard";
 import { SchoolMarquee } from "@/components/brand/SchoolMarquee";
@@ -78,47 +87,50 @@ export default function MarketplaceHomePage() {
       affiliationNo: "IB/2018/0094",
       image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&auto=format&fit=crop&q=80",
     },
+  ];
+
+  const inforidaModules = [
     {
-      id: "sch-4",
-      name: "Delhi Public Global Campus",
-      location: "HSR Layout Sector 1, Bengaluru",
-      boardType: "CBSE",
-      feeRange: { min: 95000, max: 155000 },
-      rating: 4.8,
-      reviewCount: 220,
-      featured: false,
-      facilities: ["Astronomy Observatory", "Indoor Badminton", "Robotics"],
-      passRate: "99.4%",
-      affiliationNo: "CBSE/2020/5531",
-      image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&auto=format&fit=crop&q=80",
+      icon: CreditCard,
+      color: "bg-emerald-50 text-emerald-700 border-emerald-200",
+      title: "Automated Fee Collection",
+      desc: "Instant WhatsApp fee reminders with direct NPCI UPI payment links. Zero cash counter queues and automated receipt generation.",
+      tag: "Zero Manual Ledger",
     },
     {
-      id: "sch-5",
-      name: "Greenwood High International",
-      location: "Sarjapur Road, Bengaluru",
-      boardType: "ICSE",
-      feeRange: { min: 140000, max: 240000 },
-      rating: 4.9,
-      reviewCount: 410,
-      featured: true,
-      facilities: ["Bilingual Curriculum", "Heated Pool", "Tennis Court"],
-      passRate: "100%",
-      affiliationNo: "ICSE/2016/1104",
-      image: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&auto=format&fit=crop&q=80",
+      icon: UserCheck,
+      color: "bg-blue-50 text-blue-700 border-blue-200",
+      title: "AI Classroom Attendance",
+      desc: "Mark morning attendance in 30 seconds. PWA offline classroom mode syncs attendance logs and sends instant WhatsApp absent alerts to parents.",
+      tag: "Offline PWA Mode",
     },
     {
-      id: "sch-6",
-      name: "National Vidyalaya Academy",
-      location: "Jayanagar 3rd Block, Bengaluru",
-      boardType: "STATE",
-      feeRange: { min: 45000, max: 75000 },
-      rating: 4.7,
-      reviewCount: 162,
-      featured: false,
-      facilities: ["Digitized Library", "Science Park", "Cricket Academy"],
-      passRate: "98.8%",
-      affiliationNo: "KAR/2017/4491",
-      image: "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=800&auto=format&fit=crop&q=80",
+      icon: Users,
+      color: "bg-purple-50 text-purple-700 border-purple-200",
+      title: "Paperless Admission CRM",
+      desc: "Digital student application pipeline from lead inflow to document verification and instant online fee deposit.",
+      tag: "100% Digital Pipeline",
+    },
+    {
+      icon: Bot,
+      color: "bg-amber-50 text-amber-700 border-amber-200",
+      title: "Gemini AI Co-Pilot & Remarks",
+      desc: "Generate personalized report card progress remarks and structured CBSE lesson plans in seconds using AI assistance.",
+      tag: "AI Co-Pilot",
+    },
+    {
+      icon: Bus,
+      color: "bg-cyan-50 text-cyan-700 border-cyan-200",
+      title: "Real-time GPS Bus Fleet",
+      desc: "Live GPS bus location tracking on parent apps with pickup/drop notifications, speed alerts, and automated transport billing.",
+      tag: "Live Parent Tracking",
+    },
+    {
+      icon: FileSpreadsheet,
+      color: "bg-rose-50 text-rose-700 border-rose-200",
+      title: "CBSE / ICSE Report Cards",
+      desc: "Automated grade percentile calculation (A1-E), co-scholastic rubrics, and 1-click bulk PDF printing for report cards.",
+      tag: "Statutory Compliant",
     },
   ];
 
@@ -141,23 +153,41 @@ export default function MarketplaceHomePage() {
 
   return (
     <div className="space-y-16 py-4">
-      {/* Hero Search Section */}
-      <section className="text-center max-w-4xl mx-auto space-y-8 pt-4">
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-900 border border-emerald-200 rounded-full text-xs font-extrabold shadow-xs">
-          <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-          <span>India's #1 Verified School ERP & B2C Discovery Marketplace</span>
+      {/* 🚀 Inforida-Tier Hero Section */}
+      <section className="text-center max-w-4xl mx-auto space-y-8 pt-2">
+        <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-900 border border-blue-200 rounded-full text-xs font-extrabold shadow-xs">
+          <Sparkles className="w-4 h-4 text-blue-600 shrink-0" />
+          <span>Inforida-Tier Architecture · #1 AI-Powered School Operating Infrastructure</span>
         </div>
 
         <h1 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight">
-          Modernizing School ERP <br />
+          Run Your School on Autopilot with <br />
           <span className="bg-gradient-to-r from-blue-700 via-indigo-600 to-emerald-600 bg-clip-text text-transparent">
-            For Institutions & Parents
+            AI Automation & Verified Marketplace
           </span>
         </h1>
 
         <p className="text-base text-slate-600 max-w-2xl mx-auto font-medium leading-relaxed">
-          Compare 500+ pre-certified CBSE, ICSE & IB schools, or automate your campus with Growcus Smart ERP—featuring instant UPI fee collection, PWA offline attendance, and Gemini AI lesson planning.
+          Growcus automates fees, attendance, admissions, classrooms, and parent communication on one unified platform. Trusted by 250+ Indian schools and 120,000+ parents.
         </p>
+
+        {/* Action Buttons */}
+        <div className="flex flex-wrap items-center justify-center gap-4">
+          <Link
+            href="/pricing#book-demo"
+            className="px-6 py-3.5 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-extrabold text-xs md:text-sm rounded-2xl shadow-md transition-all active:scale-95 flex items-center gap-2"
+          >
+            <span>Book Free School Demo</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+          <Link
+            href="/features"
+            className="px-6 py-3.5 bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 font-bold text-xs md:text-sm rounded-2xl shadow-xs transition-all flex items-center gap-2"
+          >
+            <Layers className="w-4 h-4 text-indigo-600" />
+            <span>Explore All 14 ERP Modules</span>
+          </Link>
+        </div>
 
         {/* Search Console Bar */}
         <form
@@ -204,7 +234,44 @@ export default function MarketplaceHomePage() {
         <SchoolMarquee />
       </section>
 
-      {/* 🚀 Interactive Live Portal Demo Launcher (Clean Bright Styling) */}
+      {/* 🏛️ Inforida-Style Core Feature Pillars */}
+      <section className="space-y-6">
+        <div className="text-center max-w-2xl mx-auto space-y-2">
+          <span className="px-3 py-1 bg-blue-100 text-blue-800 text-[11px] font-bold rounded-full border border-blue-200">
+            6 Core Platform Pillars
+          </span>
+          <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+            Designed Specifically for Modern Indian Schools
+          </h2>
+          <p className="text-xs text-slate-600">
+            Eliminate administrative headaches and save ₹4.2 Lakhs annually in manual operations
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {inforidaModules.map((m) => {
+            const Icon = m.icon;
+            return (
+              <div key={m.title} className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs hover:shadow-md transition-all space-y-3 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <div className={`p-2.5 rounded-xl border ${m.color}`}>
+                      <Icon className="w-5 h-5" />
+                    </div>
+                    <span className="text-[10px] font-extrabold uppercase bg-slate-100 text-slate-700 px-2 py-0.5 rounded border border-slate-200">
+                      {m.tag}
+                    </span>
+                  </div>
+                  <h3 className="font-bold text-base text-slate-900">{m.title}</h3>
+                  <p className="text-xs text-slate-600 mt-1 leading-relaxed">{m.desc}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* 🚀 Interactive Live Portal Demo Launcher (Public Sandbox) */}
       <section className="bg-gradient-to-br from-blue-50/80 via-white to-indigo-50/60 rounded-3xl p-6 md:p-8 shadow-md border border-blue-200 space-y-6">
         <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 border-b border-blue-100 pb-6">
           <div>
