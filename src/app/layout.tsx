@@ -1,10 +1,13 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Growcus — School Discovery Marketplace & Modular ERP",
   description: "Hybrid B2C school discovery marketplace, modular school ERP, and AI teacher co-pilot.",
   manifest: "/manifest.json",
+};
+
+export const viewport: Viewport = {
   themeColor: "#1d4ed8",
 };
 
