@@ -148,9 +148,9 @@ export default function MarketplaceHomePage() {
           <span>India's #1 Verified School ERP & B2C Discovery Marketplace</span>
         </div>
 
-        <h1 className="text-4xl md:text-6xl font-black text-slate-950 tracking-tight leading-tight">
+        <h1 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight">
           Modernizing School ERP <br />
-          <span className="bg-gradient-to-r from-blue-700 via-indigo-600 to-violet-700 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-blue-700 via-indigo-600 to-emerald-600 bg-clip-text text-transparent">
             For Institutions & Parents
           </span>
         </h1>
@@ -204,19 +204,19 @@ export default function MarketplaceHomePage() {
         <SchoolMarquee />
       </section>
 
-      {/* 🚀 Interactive Live Portal Demo Launcher (Public Sandbox) */}
-      <section className="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-6 md:p-8 shadow-xl space-y-6">
-        <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 border-b border-slate-800 pb-6">
+      {/* 🚀 Interactive Live Portal Demo Launcher (Clean Bright Styling) */}
+      <section className="bg-gradient-to-br from-blue-50/80 via-white to-indigo-50/60 rounded-3xl p-6 md:p-8 shadow-md border border-blue-200 space-y-6">
+        <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 border-b border-blue-100 pb-6">
           <div>
-            <div className="flex items-center gap-2 text-amber-400 font-bold text-xs uppercase tracking-wider mb-1">
-              <Zap className="w-4 h-4 fill-amber-400" />
+            <div className="flex items-center gap-2 text-amber-700 font-bold text-xs uppercase tracking-wider mb-1">
+              <Zap className="w-4 h-4 fill-amber-500 text-amber-500" />
               <span>Interactive Live Demo Sandbox</span>
             </div>
-            <h2 className="text-xl md:text-2xl font-bold">Try Live Multi-Portal Demo Sessions Instantly</h2>
+            <h2 className="text-xl md:text-2xl font-bold text-slate-900">Try Live Multi-Portal Demo Sessions Instantly</h2>
           </div>
           <Link
             href="/pricing"
-            className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-xl shadow-sm self-start md:self-auto"
+            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-sm self-start md:self-auto"
           >
             View Pricing & Onboard School →
           </Link>
@@ -225,46 +225,46 @@ export default function MarketplaceHomePage() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <Link
             href="/dashboard"
-            className="p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl transition-all space-y-2 group"
+            className="p-4 bg-white hover:bg-blue-50/80 border border-slate-200 rounded-2xl transition-all space-y-2 group shadow-xs hover:shadow-md"
           >
             <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center font-bold text-white shadow-sm">
               <Shield className="w-5 h-5" />
             </div>
-            <h3 className="font-bold text-sm text-white group-hover:text-blue-300">Admin Control</h3>
-            <p className="text-[11px] text-slate-400">Executive KPIs, admissions funnel, & fee ledger</p>
+            <h3 className="font-bold text-sm text-slate-900 group-hover:text-blue-700">Admin Control</h3>
+            <p className="text-[11px] text-slate-500">Executive KPIs, admissions funnel, & fee ledger</p>
           </Link>
 
           <Link
             href="/teacher/dashboard"
-            className="p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl transition-all space-y-2 group"
+            className="p-4 bg-white hover:bg-violet-50/80 border border-slate-200 rounded-2xl transition-all space-y-2 group shadow-xs hover:shadow-md"
           >
             <div className="w-10 h-10 rounded-xl bg-violet-600 flex items-center justify-center font-bold text-white shadow-sm">
               <BookOpen className="w-5 h-5" />
             </div>
-            <h3 className="font-bold text-sm text-white group-hover:text-violet-300">Teacher Portal</h3>
-            <p className="text-[11px] text-slate-400">Attendance, AI remarks, & gradebook</p>
+            <h3 className="font-bold text-sm text-slate-900 group-hover:text-violet-700">Teacher Portal</h3>
+            <p className="text-[11px] text-slate-500">Attendance, AI remarks, & gradebook</p>
           </Link>
 
           <Link
             href="/parent/overview"
-            className="p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl transition-all space-y-2 group"
+            className="p-4 bg-white hover:bg-emerald-50/80 border border-slate-200 rounded-2xl transition-all space-y-2 group shadow-xs hover:shadow-md"
           >
             <div className="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center font-bold text-white shadow-sm">
               <Users className="w-5 h-5" />
             </div>
-            <h3 className="font-bold text-sm text-white group-hover:text-emerald-300">Parent Portal</h3>
-            <p className="text-[11px] text-slate-400">Attendance alerts & 1-click UPI fee receipts</p>
+            <h3 className="font-bold text-sm text-slate-900 group-hover:text-emerald-700">Parent Portal</h3>
+            <p className="text-[11px] text-slate-500">Attendance alerts & 1-click UPI fee receipts</p>
           </Link>
 
           <Link
             href="/student/dashboard"
-            className="p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl transition-all space-y-2 group"
+            className="p-4 bg-white hover:bg-cyan-50/80 border border-slate-200 rounded-2xl transition-all space-y-2 group shadow-xs hover:shadow-md"
           >
             <div className="w-10 h-10 rounded-xl bg-cyan-600 flex items-center justify-center font-bold text-white shadow-sm">
               <GraduationCap className="w-5 h-5" />
             </div>
-            <h3 className="font-bold text-sm text-white group-hover:text-cyan-300">Student Portal</h3>
-            <p className="text-[11px] text-slate-400">Streak, house leaderboard, & online quizzes</p>
+            <h3 className="font-bold text-sm text-slate-900 group-hover:text-cyan-700">Student Portal</h3>
+            <p className="text-[11px] text-slate-500">Streak, house leaderboard, & online quizzes</p>
           </Link>
         </div>
       </section>

@@ -169,17 +169,17 @@ export default function FeaturesAndModulesPage() {
         </div>
       </div>
 
-      {/* CTA Box */}
-      <div className="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white rounded-2xl p-8 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+      {/* CTA Box (Light Theme) */}
+      <div className="bg-gradient-to-r from-blue-50 via-white to-indigo-50 text-slate-900 border border-blue-200 rounded-2xl p-8 shadow-md flex flex-col md:flex-row items-center justify-between gap-6">
         <div>
-          <h2 className="text-2xl font-bold">Ready to Upgrade Your School Administration?</h2>
-          <p className="text-xs text-slate-300 mt-1">
+          <h2 className="text-2xl font-bold text-slate-900">Ready to Upgrade Your School Administration?</h2>
+          <p className="text-xs text-slate-600 mt-1">
             Get a 14-day risk-free demo with free data migration for your institution.
           </p>
         </div>
         <Link
           href="/pricing#book-demo"
-          className="px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-bold text-xs rounded-xl shadow-lg shrink-0 flex items-center gap-2"
+          className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-md shrink-0 flex items-center gap-2"
         >
           <span>Book Free School Demo</span>
           <ArrowRight className="w-4 h-4" />

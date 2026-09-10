@@ -46,21 +46,21 @@ export default function MarketplaceLayout({ children }: { children: ReactNode })
       {/* Main Content */}
       <main className="flex-1 max-w-7xl w-full mx-auto p-4 md:p-8">{children}</main>
 
-      {/* Public Footer */}
-      <footer className="bg-slate-900 text-slate-400 py-8 px-6 text-xs border-t border-slate-800">
+      {/* Public Light Footer */}
+      <footer className="bg-white text-slate-600 py-8 px-6 text-xs border-t border-slate-200 shadow-xs">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-3">
-            <GrowcusLogo variant="light" size="sm" />
+            <GrowcusLogo variant="color" size="sm" />
             <div>
-              <p className="text-[11px] text-slate-400">Unbiased organic school rankings • Zero lead-gen algorithm bias</p>
+              <p className="text-[11px] text-slate-500 font-medium">Unbiased organic school rankings • Zero lead-gen algorithm bias</p>
             </div>
           </div>
-          <div className="flex flex-wrap gap-4 text-[11px]">
-            <Link href="/features" className="hover:text-white transition-colors">ERP Modules & Features</Link>
-            <Link href="/pricing" className="text-blue-400 font-bold hover:text-white transition-colors">
+          <div className="flex flex-wrap gap-4 text-[11px] font-semibold text-slate-700">
+            <Link href="/features" className="hover:text-blue-700 transition-colors">ERP Modules & Features</Link>
+            <Link href="/pricing" className="text-blue-700 font-bold hover:underline transition-colors">
               School ERP Pricing & Plans
             </Link>
-            <Link href="/login" className="hover:text-white transition-colors">School ERP Admin Login</Link>
+            <Link href="/login" className="hover:text-slate-900 transition-colors">School ERP Admin Login</Link>
           </div>
         </div>
       </footer>
