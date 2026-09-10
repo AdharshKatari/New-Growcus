@@ -1,3 +1,5 @@
+"use client";
+
 import {
   FileText,
   Download,
@@ -149,7 +151,7 @@ export default function ExecutiveReportsPage() {
                       <span className="text-[10px] font-medium text-slate-400">{rep.type}</span>
                       <button
                         onClick={() => alert(`Generating ${rep.title}... Download will start in a moment.`)}
-                        className="px-3 py-1 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-lg text-[11px] flex items-center gap-1 transition-all"
+                        className="px-3 py-1 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-lg text-[11px] flex items-center gap-1 transition-all active:scale-[0.98]"
                       >
                         <Download className="w-3 h-3" />
                         Generate
